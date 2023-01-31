@@ -245,5 +245,5 @@ cnv.PhoneNumberSameDigits = function(pt) {
 
 
 function valueToNumberConverter(parseTree) {
-        return parseInt(parseTree.value);
+    return parseInt(parseTree.value);
 }

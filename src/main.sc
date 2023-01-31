@@ -58,13 +58,13 @@ theme: /
                 q: * да *
                 script:
                     sendPolisToServer($session.polis);
-                go!: /state2
+                    // если пациент не определен (запрос с ошибкой) перенаправить на оператора
             state: no
                 q: $NEGATION
                 q: $no
                 q: нет*
                 q: * не* *
-                go!: /state1
+                go!: /getPolis
         state: repeat 
             q: * Повторите * 
             q: * что вы сказали? *
@@ -76,6 +76,15 @@ theme: /
             q: * я не понял *   
             q: * я не поняла *   
             go!: /state1
+            
+    state: getDoctor
+        a: Хорошо! Скажите, к какому врачу вам нужно записаться на прием.
+        go!: 
+            
+    state: connectWithOperator
+        a: Соединяю вас с оператором, оставайтесь на линии.
+        script:
+            transferToOperator();        
             
     state: NoMatch
         event!: noMatch

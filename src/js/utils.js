@@ -8,3 +8,63 @@ function saveUserPolis() {
     
     echo($session.polis);
 }
+
+function formattedPolis(polis) {
+    return polis.split("").join(" ");
+}
+
+function formatTel(phone) {
+    return phone[0] + ' ' + phone[1] + phone[2] + phone[3] + ' ' + phone[4] + phone[5] + phone[6] + ' ' + phone[7] + phone[8] + ' ' + phone[9] + phone[10];
+}
+
+
+function listenInterrupting() {
+    $dialer.bargeInResponse({
+        bargeInTrigger: "final",
+    });
+}
+
+
+function sendResponse(text) {
+    var response = c().response;
+    
+    response.replies = response.replies || [];
+    
+    response.replies.push({
+        type: 'text',
+        text: text,
+    });
+}
+
+function transferToOperator(phoneNumber) {
+    var response = c().response;
+    
+    response.replies = response.replies || [];
+    
+    response.replies.push({
+        type: "switch",
+        phoneNumber: phoneNumber, 
+        continueCall: false,
+        continueRecording: true,
+    });
+}
+
+function c() {
+    return $jsapi.context();
+}
+
+function echo(data) {
+    log(toPrettyString(data));
+}
+
+function sendAudio(url, name) {
+    var response = c().response;
+    
+    response.replies = response.replies || [];
+    
+    response.replies.push({
+        type: 'audio',
+        audioUrl: url,
+        audioName: name,
+    });
+}
