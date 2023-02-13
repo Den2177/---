@@ -1,6 +1,7 @@
 function auth() {
     var sessId = getSessId();
     save("sess_id", sessId);
+    echo(getItem("sess_id"));
     
     var foundedUser = findUserByPolis();
     save('person_id', foundedUser.Person_id);
