@@ -7,8 +7,14 @@ function auth() {
     
     var userAttach = findUserAttach();
     save('person_attach', userAttach);
-    save('lpu_id', userAttach.attach_data.Lpu_id);
+    save('lpu_id', userAttach.attach_data[0].Lpu_id);
     
     var moby = getMobyNameById();
-    echo(moby);
+    save("moby", moby);
+    
+    if (sessId && foundedUser && userAttach && moby) {
+        $reactions.transition("/getDoctor");
+    } else {
+        transferToOperator("778");
+    }
 }

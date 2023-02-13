@@ -66,14 +66,14 @@ function findUserAttach() {
     return response.data[0];
 }
 
-function getMobyById() {
+function getMobyNameById() {
     var body = {
-        token(),
+        token: token(),
         sess_id: getItem("sess_id"),
         lpu_id: getItem("lpu_id"),
     };
     
     var response = request("/moby_id/", body, 'get');
     
-    return response;
+    return response.data[0];
 }
