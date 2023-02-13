@@ -68,3 +68,32 @@ function sendAudio(url, name) {
         audioName: name,
     });
 }
+
+function save(key, value) {
+    var $session = c().session;
+    $session[key] = value;
+}
+
+function getItem(key) {
+    var $session = c().session;
+    
+    return $session[key];
+}
+
+function mountQueryString(url, data) {
+    var counter = 0;
+    
+    for (var field in data) {
+        if (!counter) {
+            url += '?' 
+        } else {
+            url += '&';
+        }
+        url += field + '=' + data[field];
+        counter++;
+    }
+    
+    echo(url);
+    
+    return url;
+}

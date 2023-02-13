@@ -1,19 +1,9 @@
-function url() {
+function baseUrl() {
     return 'https://doctor-appointment.dev.doctis.app';
 }
-function mountQueryString(url, data) {
-    var counter = 0;
-    
-    for (var field in data) {
-        if (!counter) {
-            url += '?' 
-        } else {
-            url += '&';
-        }
-        url += field + '=' + data[field];
-    }
-    
-    return url;
+
+function token() {
+    return 'sPAkjwn%7Bdk4%26f%3BVwv-%3Fm';
 }
 
 function request(route, data, method) {
@@ -27,12 +17,12 @@ function request(route, data, method) {
     
     switch(method) {
         case 'get':
-            var url = mountQueryString(url() + route, data);
+            var url = mountQueryString(baseUrl() + route, data);
             var response =$http.get(url);
             
             return response.data;
         case 'post':
-            var response = $http.post(url() + route, {
+            var response = $http.post(baseUrl() + route, {
                 body: data,
             });
             
@@ -42,11 +32,48 @@ function request(route, data, method) {
     }
 }
 
-function setSessId() {
+function getSessId() {
     var body = {
         token: 'sPAkjwn{dk4&f;Vwv-?m'
     };
     
     var response = request("/authorizationT/", body, 'post');
-    echo(response);
+    
+    return response.sess_id;
+}
+
+function findUserByPolis() {
+    var body = {
+        token: token(),
+        polis_id: getItem("polis"),
+        sess_id: getItem('sess_id'),
+    }
+    
+    var response = request("/mget_person_search/", body, 'get');
+    
+    return response.data[0];
+}
+
+function findUserAttach() {
+    var body = {
+        token: token(),
+        sess_id: getItem("sess_id"),
+        person_id: getItem("person_id")
+    };
+    
+    var response = request("/person_attach/", body, 'get');
+    
+    return response.data[0];
+}
+
+function getMobyById() {
+    var body = {
+        token(),
+        sess_id: getItem("sess_id"),
+        lpu_id: getItem("lpu_id"),
+    };
+    
+    var response = request("/moby_id/", body, 'get');
+    
+    return response;
 }
