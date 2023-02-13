@@ -57,7 +57,7 @@ theme: /
                 q: * ага *
                 q: * да *
                 script:
-                    sendPolisToServer($session.polis);
+                    auth();
                     // если пациент не определен (запрос с ошибкой) перенаправить на оператора
             state: no
                 q: $NEGATION
