@@ -48,7 +48,7 @@ theme: /
             
         state: correctPolis
             script:
-                sendResponse("Номер полиса пациента: " + formattedPolis($session.polis) + " .все вено?");
+                sendResponse("Номер полиса пациента: " + formattedPolis($session.polis) + " .все верно?");
             state: yes
                 q: $AGREEMENT
                 q: $yes

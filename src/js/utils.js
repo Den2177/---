@@ -57,7 +57,7 @@ function echo(data) {
     log(toPrettyString(data));
 }
 
-function sendAudio(url, name) {
+function sendAudio(aurl, name) {
     var response = c().response;
     
     response.replies = response.replies || [];
